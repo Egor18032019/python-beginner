@@ -14,9 +14,11 @@ class Character:
         self.attack_power = self.base_attack_power * level
 
     def attack(self, *, target: "Character") -> None:
+        print(f"target {target.character_name}: {target.attack_power} ")
         target.got_damage(damage=self.attack_power)
 
     def got_damage(self, *, damage: int) -> None:
+        print(f"defence {self.character_name}: {self.defence} ")
         damage = damage * (100 - self.defence) / 100
         damage = round(damage)
         self.health_points -= damage
@@ -24,7 +26,7 @@ class Character:
     def is_alive(self) -> bool:
         return self.health_points > 0
 
-    @property
+    @property #когда мы обращаемся к self.defence то вызывается эта фунцкция
     def defence(self) -> int:
         defence = self.base_defence * self.level
         return defence
@@ -62,6 +64,7 @@ class Elf(Character):
     base_defence = 10
 
     def attack(self, *, target: "Character") -> None:
+        print(f"target {target.character_name}: {target.attack_power} ")
         attack_power = self.attack_power
         if target.health_points_percent() < 30:
             attack_power = self.attack_power * 3

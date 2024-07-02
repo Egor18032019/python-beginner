@@ -20,7 +20,7 @@ def retry(func):
 
 
 @retry
-def get_weather_by_hours_for_day_from_api(*, date: str, city: str) -> list[dict]:
+def get_weather_by_hours_for_day_from_api(date: str, city: str) -> list[dict]:
     url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}/{date}/{date}?unitGroup=us&key={API_KEY}"
     response = requests.get(url)
     weather_by_days = response.json()["days"]
@@ -44,8 +44,8 @@ def get_dangerous_hours(*, weather_by_hour: list[dict]) -> list[dict]:
     return dangerous_hours
 
 
-date = "2023-08-04"
-city = "London,UK"
-weather_by_hour = get_weather_by_hours_for_day_from_api(date=date, city=city)
+date1 = "2023-08-04"
+city1 = "London,UK"
+weather_by_hour = get_weather_by_hours_for_day_from_api(date=date1, city=city1)
 dangerous_hours = get_dangerous_hours(weather_by_hour=weather_by_hour)
 print(dangerous_hours)
